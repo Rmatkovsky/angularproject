@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<title>Angular validate module</title>
+<head>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-controller="mainController">
+<content>
+    <div class="container">
+        <h1>AngularJS Form</h1>
+        <ul class="tabs">
+            <li>
+                <input type="radio" name="tabs" id="tab1" checked />
+                <label for="tab1">Step #1</label>
+                <div id="tab-content1" class="tab-content">
+                    <table class="table">
+                        <thead>
+                           <tr>
+                               <th>
+                                   Checked
+                               </th>
+                               <th>
+                                   Name
+                               </th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="field in dataFields.items">
+                                <td>
+                                    <input type="checkbox" ng-model="selectedFields[$index]">
+                                </td>
+                                <td> {{field.name}} </td>
+                            </tr>
+                            <tr>
+                                <td> # </td>
+                                <td>
+                                    <button ng-click="next()">
+                                        Next
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </li>
+
+            <li>
+                <input type="radio" name="tabs" id="tab2" />
+                <label for="tab2">Result</label>
+                <div id="tab-content2" class="tab-content">
+                    <table>
+                        <tr ng-repeat="(name, value) in selectedFields ">
+                            <td>
+                                <span>{{name}}</span>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+
+        <br style="clear: both;" />
+    </div>
+
+
+</content>
+<!--included JS files -->
+<script type="text/javascript" src="js/libs/angular.min.js"></script>
+<script type="text/javascript" src="js/libs/angular-resource.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/services/defaultModel.js"></script>
+<script type="text/javascript" src="js/services/globalFunctions.js"></script>
+<script type="text/javascript" src="js/services/authorization.js"></script>
+<script type="text/javascript" src="js/models/userModel.js"></script>
+<script type="text/javascript" src="js/controllers/mainController.js"></script>
+
+</body>
+</html>
