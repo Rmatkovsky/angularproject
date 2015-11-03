@@ -1,0 +1,57 @@
+
+<div id="tab-content2" class="tab-content">
+    <form ng-submit="sendResults( form )" name="form" ng-model="form">
+        <table class="table">
+            <tr ng-repeat="(name, value) in selectedFields" ng-if="value">
+                <td>
+                    <span>{{dataFields.items[name].name}}</span>
+                    <span ng-if="dataFields.items[name].required">*</span>:
+                </td>
+                <td>
+                    <div ng-switch="dataFields.items[name].type" class="left">
+                        <div ng-switch-when="select">
+                            <select
+                                    ng-model="model[dataFields.items[name].name]"
+                                    ng-options="field.id as field.name for field in dataFields.items[name].value">
+                                <option value="">-- choose item --</option>
+                            </select>
+                        </div>
+                        <div ng-switch-when="radio">
+                            <div ng-repeat="item in dataFields.items[name].value">
+                                <input
+                                        type="radio"
+                                        name="{{dataFields.items[name].name}}"
+                                        ng-model="model[dataFields.items[name].name]"
+                                        ng-value="item.value" ng-required="dataFields.items[name].required"
+                                        /> {{item.name}}
+                            </div>
+                        </div>
+                        <div ng-switch-default="">
+                            <input
+                                    type="{{dataFields.items[name].type}}"
+                                    ng-model="model[dataFields.items[name].name]"
+                                    placeholder="{{dataFields.items[name].placeholder}}"
+                                    ng-value="dataFields.items[name].value"
+                                    ng-required="dataFields.items[name].required"
+                                    max="{{dataFields.items[name].max}}"
+                                    min="{{dataFields.items[name].min}}"
+                                    ng-maxlength="dataFields.items[name].maxlength"
+                                    ng-minlength="dataFields.items[name].minlength" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span >All fields marked with a star must be filled</span><br />
+                    <span ng-show="isSend">Thank you! We check your information.</span>
+                </td>
+            <tr>
+                <td colspan="2">
+                    <a ui-sref="start">Back</a>
+                    <input type="submit" value="SEND" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

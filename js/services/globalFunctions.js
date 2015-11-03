@@ -7,30 +7,6 @@ app.factory('globalFunctions', [function( ) {
     var globalFunctions = {};
 
     /**
-     * errors - this global variable for all errors
-     * @type {{}}
-     */
-    globalFunctions.errors = {};
-
-    /**
-     * getErrors - check if is exists errors by value
-     * @param iValueName
-     * @returns {*}
-     */
-    globalFunctions.getErrors = function( iValueName ) {
-        var valueName = iValueName.toLowerCase();
-
-        return this.errors[ valueName ];
-    };
-
-    /**
-     * clearErrors - to clean errors variable
-     */
-    globalFunctions.clearErrors = function() {
-        this.errors = {};
-    };
-
-    /**
      * isEmpty - this function(helper) for check if is empty value(numeric,string,object,array and etc.)
      * @param iValue
      * @returns {boolean}

@@ -1,0 +1,32 @@
+
+    <div id="tab-content1" class="tab-content">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Checked
+                </th>
+                <th>
+                    Name
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="field in dataFields.items">
+                <td>
+                    <input type="checkbox" ng-model="selectedFields[$index]">
+                </td>
+                <td> {{field.name}} </td>
+            </tr>
+            <tr>
+                <td colspan="2" >
+                    <a ng-click="reset()" class="reset">reset</a> &nbsp;
+                    <a ui-sref="results" class="next">
+                        Next
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>

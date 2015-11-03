@@ -1,82 +1,78 @@
 "use strict";
 
-app.controller('mainController', ['$scope', 'globalFunctions', 'authorization', 'userModel',
-    function( $scope, globalFunctions, authorization, userModel ) {
-        angular.extend( $scope, globalFunctions );
+app.controller('mainController', ['$scope', '$state', '$http', 'globalFunctions', function( $scope, $state, $http, globalFunctions ) {
+    angular.extend( $scope, globalFunctions );
+    $scope.uiState = $state;
 
-        $scope.isAuthenticated = false;
+    $scope.selectedFields = {};
+    $scope.model = {};
+    $scope.form = null;
+    $scope.isSend = false;
+
+
+    /**
+     * [checkState - check if selected one more fields]
+     * @param iState
+     */
+    var checkState = function( iState ) {
+        if( iState == 'results' && $scope.isEmpty( $scope.selectedFields ) ) {
+            $state.transitionTo('start');
+        };
+    };
+
+    /**
+     * [getFields - get fields from server]
+     */
+    var getFields = function () {
+        $http({
+            method: 'GET',
+            url: 'http://localhost:8000/fields'
+        }).then(function (response) {
+            $scope.dataFields = response.data;
+        }, function errorCallback(response) {
+            console.warn('error', response)
+        });
+    };
+
+    /**
+     * [reset - reset form and selected fields]
+     */
+    $scope.reset = function( ) {
         $scope.selectedFields = {};
+        $scope.isSend = false;
+        $scope.model = {};
+    };
 
-        $scope.next = function() {
-            console.log($scope.selectedFields)
+    /**
+     * [next - next step ]
+     * @returns {boolean}
+     */
+    $scope.next = function() {
+        if(  !$scope.isEmpty( $scope.selectedFields ) ) {
+            $state.transitionTo('results');
+        }
+        return false;
+    };
+
+    /**
+     * [sendResults - immulate sending results to server]
+     * @param iForm
+     * @returns {boolean}
+     */
+    $scope.sendResults = function( iForm ) {
+        if( iForm.$pristine ) {
+            return false;
         };
+        $scope.isSend = true;
+    };
 
-        $scope.dataFields = {
-            "items": [
-                {
-                    "name": "Login",
-                    "type": "text",
-                    "value": "",
-                    "placeholder": "Login"
-                },
-                {
-                    "name": "Password",
-                    "type": "password",
-                    "value": "",
-                    "placeholder":"Password"
-                },
-                {
-                    "name": "Name",
-                    "type": "text",
-                    "value": "Unknown",
-                    "placeholder": "Name"
-                },
-                {
-                    "name": "Lastname",
-                    "type": "text",
-                    "value": "Unknown",
-                    "placeholder": "Lastname"
-                },
-                {
-                    "name": "Country",
-                    "type": "select",
-                    "value": [
-                        {
-                            "name": "Ukraine",
-                            "id": "23"
-                        },
-                        {
-                            "name": "England",
-                            "id": "19"
-                        },
-                        {
-                            "name": "Indonesia",
-                            "id": "20"
-                        }
-                    ]
-                },
-                {
-                    "name": "Sex",
-                    "type": "radio",
-                    "value": [
-                        {
-                            "name": "Men",
-                            "value": "m"
-                        },
-                        {
-                            "name": "Women",
-                            "value": "w"
-                        }
-                    ],
-                    "placeholder": "Lastname"
-                },
-                {
-                    "name": "Terms & Conditionals",
-                    "type": "checkbox",
-                    "value": "true"
-                }
-            ]
-        };
+    /**
+     * watcher for state
+     */
+    $scope.$watch('uiState.current.name', function(newValue) {
+        checkState( newValue );
+    });
 
-    }
-]);
+    getFields();
+
+}]);

@@ -4,13 +4,15 @@
       "name": "Login",
       "type": "text",
       "value": "",
-      "placeholder": "Login"
+      "placeholder": "Login",
+      "required": "true"
     },
     {
       "name": "Password",
       "type": "password",
       "value": "",
-      "placeholder":"Password"
+      "placeholder":"Password",
+      "required": "true"
     },
     {
       "name": "Name",
@@ -23,6 +25,12 @@
       "type": "text",
       "value": "Unknown",
       "placeholder": "Lastname"
+    },
+    {
+      "name": "Born",
+      "type": "date",
+      "value": "Unknown",
+      "placeholder": "Born"
     },
     {
       "name": "Country",
@@ -54,13 +62,19 @@
           "name": "Women",
           "value": "w"
         }
-      ],
-      "placeholder": "Lastname"
+      ]
+    },
+    {
+      "name": "Age",
+      "type": "number",
+      "min": "18",
+      "max": "20"
     },
     {
       "name": "Terms & Conditionals",
       "type": "checkbox",
-      "value": "true"
+      "value": "true",
+      "required": "true"
     }
   ]
 }
