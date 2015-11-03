@@ -1,0 +1,25 @@
+{
+  "name": "angularproject",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "index.html",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "fs": "^0.0.2",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rmatkovsky/angularproject.git"
+  },
+  "author": "Ruslan Matkovsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rmatkovsky/angularproject/issues"
+  },
+  "homepage": "https://github.com/Rmatkovsky/angularproject#readme"
+}
